@@ -259,7 +259,7 @@ export default function DemoSidebar() {
 
       {/* Steps List */}
       {steps.length > 0 && (
-        <div className="flex-1 overflow-y-auto p-3 space-y-1 pt-6">
+        <div className="flex-1 overflow-y-auto p-3 space-y-1 pt-6 scrollbar-micro">
           {steps.map((step, index) => {
             const isActive = index === currentStepIndex;
             const isCompleted = index < currentStepIndex;
