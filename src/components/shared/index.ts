@@ -1,13 +1,16 @@
 // Barrel for shared components.
 //
-// `StatusBadge` is re-exported from the DS — same API as v1's local one
-// (props: `status: string`). This keeps existing v1 imports of
-// `from '../shared'` working with zero source change.
-//
-// `PersonaBadge` lives locally because it's a demo-specific composition
-// (avatar + role + tone marker) that the DS doesn't ship as a single
-// component yet.
+// StatusBadge here is a v1-API-compatible badge (label/tone/icon/size) that
+// uses DS status tokens (bg-status-* etc.) internally. It coexists with the
+// DS-shipped StatusBadge (status: string) — that one is available via
+// `import { StatusBadge as DSStatusBadge } from 'strata-design-system'` if
+// the predefined-status API is preferred.
 
-export { StatusBadge } from 'strata-design-system';
+export { default as StatusBadge } from './StatusBadge';
+export type { StatusTone } from './StatusBadge';
+
 export { default as PersonaBadge } from './PersonaBadge';
 export type { PersonaMarker } from './PersonaBadge';
+
+export { default as ReasonDialog } from './ReasonDialog';
+export type { ReasonTone, ReasonPayload } from './ReasonDialog';

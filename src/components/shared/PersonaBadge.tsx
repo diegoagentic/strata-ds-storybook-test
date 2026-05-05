@@ -18,12 +18,14 @@
  * DS TOKENS: primary · success · ai · info · warning (all semantic)
  */
 
-import { Award, type LucideIcon } from 'lucide-react'
+import { Award } from 'lucide-react'
 import type { ReactNode } from 'react'
 
 export interface PersonaMarker {
     label: string
-    icon?: ReactNode | LucideIcon
+    /** Pass a rendered ReactNode like `<Award className="h-3 w-3" />`,
+     *  not a Lucide component reference — keeps types narrow. */
+    icon?: ReactNode
 }
 
 interface PersonaBadgeProps {
