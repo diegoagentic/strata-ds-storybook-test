@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Receipt, FileSearch } from 'lucide-react';
+import { Receipt, FileSearch, ArrowLeftRight } from 'lucide-react';
 import { Navbar } from './components/Navbar';
 import DemoSidebar from './components/demo/DemoSidebar';
 import DemoSpotlight from './components/demo/DemoSpotlight';
@@ -8,6 +8,7 @@ import DemoAIIndicator from './components/demo/DemoAIIndicator';
 import MBIOverviewPage from './components/mbi/MBIOverviewPage';
 import MBIAccountingPage from './components/mbi/MBIAccountingPage';
 import MBIQuotesPage from './components/mbi/MBIQuotesPage';
+import MBITransactionsPage from './components/mbi/MBITransactionsPage';
 import { useDemo } from '@/context/DemoContext';
 
 // MBI-only navigation for the MVP. v1 source: src/App.tsx getSimulationConfig().
@@ -21,6 +22,11 @@ const MBI_NAV_TABS = [
     id: 'mbi-quotes',
     label: 'Quotes AI',
     icon: <FileSearch className="size-4" />,
+  },
+  {
+    id: 'mbi-transactions',
+    label: 'Transactions',
+    icon: <ArrowLeftRight className="size-4" />,
   },
 ];
 
@@ -84,6 +90,8 @@ function renderPage(page: string, onNavigate: (id: string) => void) {
       return <MBIAccountingPage />;
     case 'mbi-quotes':
       return <MBIQuotesPage />;
+    case 'mbi-transactions':
+      return <MBITransactionsPage />;
     case 'mbi-budget':
     case 'mbi-design':
       // Stubbed — out of scope for MVP per Apr 27 stakeholder direction.

@@ -6,6 +6,7 @@ export type SimulationApp =
   | 'mbi-overview'
   | 'mbi-accounting'
   | 'mbi-quotes'
+  | 'mbi-transactions'
   | 'mbi-budget'
   | 'mbi-design';
 
