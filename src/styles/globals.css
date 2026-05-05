@@ -1,0 +1,79 @@
+/* demo-2026-strata-v3 — global styles
+ *
+ * Tailwind v4 with @tailwindcss/vite plugin (aligned with P1 strata-ds).
+ *
+ * Tokens come from the strata-design-system source (resolved via vite alias).
+ * If the DS publishes a packaged CSS export later, swap these @import paths
+ * to `strata-design-system/styles/tokens` etc.
+ */
+
+@import 'tailwindcss';
+
+/* Scan the v3 src + the consumed DS source for class names. */
+@source "../**/*.{ts,tsx}";
+@source "../../../design system/strata-ds/src/**/*.{ts,tsx}";
+
+/* Pull in the DS color/token definitions. The order matters:
+ *   1. variables.css — :root light-mode CSS variables
+ *   2. variables-dark.css — .dark { ... } override block
+ *   3. theme-v4.css — Tailwind v4 @theme mapping that exposes the
+ *      variables to utilities like bg-primary / text-foreground / etc.
+ */
+@import '../../../design system/strata-ds/src/styles/tokens/variables.css';
+@import '../../../design system/strata-ds/src/styles/tokens/variables-dark.css';
+@import '../../../design system/strata-ds/src/styles/tokens/theme-v4.css';
+
+/* Base body styling — neutral chrome until features render. */
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  font-family:
+    var(--fontFamily-sans, system-ui),
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    sans-serif;
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Demo spotlight overlay ──────────────────────────────────────────── */
+/* Applied by DemoSpotlight.tsx via toggling these class names on the
+ * step's highlightId target. The first phase pulses 3 times (3s); after
+ * that we leave a steady subtle glow until the step changes.
+ */
+@keyframes demo-spotlight-pulse {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 2px rgb(from var(--color-primary) r g b / 0.4),
+      0 0 20px rgb(from var(--color-primary) r g b / 0.15);
+  }
+  50% {
+    box-shadow:
+      0 0 0 4px rgb(from var(--color-primary) r g b / 0.6),
+      0 0 40px rgb(from var(--color-primary) r g b / 0.3);
+  }
+}
+
+.demo-spotlight-active {
+  animation: demo-spotlight-pulse 1s ease-in-out 3;
+  position: relative;
+  z-index: 1;
+}
+
+.demo-spotlight-steady {
+  box-shadow:
+    0 0 0 2px rgb(from var(--color-primary) r g b / 0.3),
+    0 0 15px rgb(from var(--color-primary) r g b / 0.1);
+  transition: box-shadow 0.5s ease-out;
+  position: relative;
+  z-index: 1;
+}

@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "strata-ds": {
+      "command": "node",
+      "args": [
+        "../design system/strata-ds/src/mcp-server/index.mjs"
+      ],
+      "env": {}
+    }
+  }
+}
