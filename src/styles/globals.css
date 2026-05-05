@@ -1,17 +1,16 @@
 /* demo-2026-strata-v3 — global styles
  *
- * Tailwind v4 with @tailwindcss/vite plugin (aligned with P1 strata-ds).
+ * Tailwind v4 with @tailwindcss/vite plugin (aligned with strata-ds).
  *
- * Tokens come from the strata-design-system source (resolved via vite alias).
- * If the DS publishes a packaged CSS export later, swap these @import paths
- * to `strata-design-system/styles/tokens` etc.
+ * Tokens come from the published strata-design-system package (vendored
+ * tarball — see package.json + vendor/).
  */
 
 @import 'tailwindcss';
 
-/* Scan the v3 src + the consumed DS source for class names. */
+/* Scan the v3 src + the installed DS bundle for class names. */
 @source "../**/*.{ts,tsx}";
-@source "../../../design system/strata-ds/src/**/*.{ts,tsx}";
+@source "../../node_modules/strata-design-system/dist/**/*.{js,mjs,cjs}";
 
 /* Pull in the DS color/token definitions. The order matters:
  *   1. variables.css — :root light-mode CSS variables
@@ -19,9 +18,9 @@
  *   3. theme-v4.css — Tailwind v4 @theme mapping that exposes the
  *      variables to utilities like bg-primary / text-foreground / etc.
  */
-@import '../../../design system/strata-ds/src/styles/tokens/variables.css';
-@import '../../../design system/strata-ds/src/styles/tokens/variables-dark.css';
-@import '../../../design system/strata-ds/src/styles/tokens/theme-v4.css';
+@import 'strata-design-system/styles/tokens/variables.css';
+@import 'strata-design-system/styles/tokens/variables-dark.css';
+@import 'strata-design-system/styles/tokens/theme-v4.css';
 
 /* Base body styling — neutral chrome until features render. */
 html,

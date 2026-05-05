@@ -19,7 +19,7 @@
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "recharts": "^3.6.0",
-    "strata-design-system": "file:../design system/strata-ds",
+    "strata-design-system": "file:./vendor/strata-design-system-0.0.1.tgz",
     "tailwind-merge": "^3.4.0"
   },
   "devDependencies": {
