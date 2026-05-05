@@ -1,0 +1,26 @@
+{
+  "_comment": [
+    "Strata DS — Claude Code UserPromptSubmit hook example.",
+    "Place this at .claude/hooks/UserPromptSubmit.json in any project that consumes the DS.",
+    "It auto-injects a reminder into the AI's context when the user mentions UI keywords,",
+    "guaranteeing plan_ui gets called even when the prompt is implicit ('design a sign-in screen',",
+    "'I need a place to show notifications', etc.).",
+    "",
+    "The hook runs BEFORE the AI processes the prompt. The AI sees the injected text",
+    "as additional context, not as user input.",
+    "",
+    "Behavior:",
+    "  - Detects 30+ UI nouns and verbs (build/add/create/make/design + component/layout/navbar/...)",
+    "  - Injects a one-line reminder telling the AI to call plan_ui first",
+    "  - Lightweight (just regex matching, no MCP calls)",
+    "",
+    "Keep this file in version control so every contributor and AI session benefits."
+  ],
+  "matchers": [
+    {
+      "name": "Strata DS — auto-remind plan_ui on UI prompts",
+      "pattern": "(?i)\\b(build|add|create|make|design|render|show|display|implement|port)\\s+(a|an|the|some)?\\s*(component|layout|navbar|sidebar|header|footer|page|screen|view|dashboard|panel|hero|card|table|list|form|field|input|select|button|modal|dialog|drawer|sheet|popover|tooltip|badge|alert|banner|toast|accordion|tabs|breadcrumb|pagination|menu|dropdown|carousel|avatar|chart|kpi|metric|status|priority|skeleton|empty|filter|toolbar|stage|progress|copy|tracking|grid|kanban|board|timeline|landing|pricing|feature|signup|login|sign-in|signin|profile|settings|notification)",
+      "inject": "🎨 [Strata DS active] The user mentioned a UI element. Before writing any code, you MUST call `plan_ui` on the strata-ds MCP server with a concrete description. The response gives you the recommended component, required tokens, applicable rules, and anti-patterns to avoid. Skip this and you'll drift from the DS. If unsure how to invoke the MCP, call `get_session_briefing` first."
+    }
+  ]
+}

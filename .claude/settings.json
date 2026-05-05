@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json.schemastore.org/claude-settings.json",
+  "_comment": [
+    "Claude Code project settings for demo-2026-strata-v3.",
+    "Connects this project to the Strata DS MCP server. Together with the",
+    ".claude/agents/ds-architect.md subagent, .claude/commands/ds-plan.md",
+    "slash command, and .claude/hooks/UserPromptSubmit.json hook, this gives",
+    "Claude Code the full 5-layer enforcement of the DS rules:",
+    "  Layer 1 — system prompt (this project's CLAUDE.md, auto-loaded)",
+    "  Layer 2 — session briefing tool (call get_session_briefing once)",
+    "  Layer 3 — assertive plan_ui tool description",
+    "  Layer 4 — UserPromptSubmit hook auto-injects on UI keywords",
+    "  Layer 5 — ds-architect subagent fires on UI patterns"
+  ],
+  "mcpServers": {
+    "strata-ds": {
+      "command": "node",
+      "args": ["../design system/strata-ds/src/mcp-server/index.mjs"]
+    }
+  }
+}

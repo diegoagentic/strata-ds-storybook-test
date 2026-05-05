@@ -4,13 +4,21 @@ Greenfield port of `demo-2026-strata` to the new strata-design-system. MVP scope
 
 ## How this project uses the Strata DS
 
-This project ships with **both layers** of the DS plugin:
+This project ships with the **full 5-layer enforcement** of the Strata DS rules. Together they ensure the AI never writes UI without consulting the catalogue first, regardless of how implicit the user's prompt is.
 
-| What | File | Purpose |
-| --- | --- | --- |
-| MCP config | `.cursor/mcp.json` | Gives any IDE the 10 MCP tools (`plan_ui`, `get_component`, `get_foundations`, etc.) |
-| Subagent | `.claude/agents/ds-architect.md` | Auto-fires on "build/add/create a [UI]" prompts. Forces blueprint-before-code workflow. |
-| Slash command | `.claude/commands/ds-plan.md` | Manual: `/ds-plan navbar with tabs` |
+| Layer | What | File | Status |
+| --- | --- | --- | --- |
+| 1 — System prompt (Cursor) | Project rules always loaded | `.cursor/rules/strata-ds.md` | ✅ |
+| 1 — System prompt (Claude Code) | Project rules always loaded | `CLAUDE.md` (this file) | ✅ |
+| 2 — Session briefing tool | Live rules dump from MCP | `get_session_briefing()` (MCP tool) | ✅ |
+| 3 — Assertive tool descriptions | `plan_ui` says "🚨 MANDATORY" | MCP server tool definitions | ✅ |
+| 4 — Pre-prompt hook (Claude Code) | Auto-inject on UI keywords | `.claude/hooks/UserPromptSubmit.json` | ✅ |
+| 5 — Subagent + slash command | Forced blueprint workflow | `.claude/agents/ds-architect.md` + `.claude/commands/ds-plan.md` | ✅ |
+
+| MCP config (Cursor) | `.cursor/mcp.json` | ✅ |
+| MCP config (Claude Code) | `.claude/settings.json` | ✅ |
+
+The MCP server itself runs from the DS folder: `node "../design system/strata-ds/src/mcp-server/index.mjs"`. Once running, `localhost:3001/health` returns 11 tools.
 
 ### Workflow for any new component port
 
