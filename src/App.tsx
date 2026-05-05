@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Receipt, FileSearch, ArrowLeftRight } from 'lucide-react';
 import { Navbar } from './components/Navbar';
+import GenUIInputBar from './components/GenUIInputBar';
 import DemoSidebar from './components/demo/DemoSidebar';
 import DemoSpotlight from './components/demo/DemoSpotlight';
 import DemoStepBanner from './components/demo/DemoStepBanner';
@@ -60,6 +61,9 @@ export default function App() {
       <DemoSidebar />
       <DemoSpotlight />
       <DemoStepBanner />
+
+      {/* Always-mounted AI prompt bar — auto-hides during the demo flow */}
+      <GenUIInputBar />
 
       {/* Top navbar — visible in both modes */}
       <Navbar
